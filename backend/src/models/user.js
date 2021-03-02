@@ -62,10 +62,10 @@ userSchema.pre('save', async function (next) {
 const User = mongoose.model('User', userSchema)
 
 
-const me = new User({
-    name: 'asdf3',
-    email: 'asdf3@asdf.com',
-    password: 'asdfasdf'
+/*const me = new User({
+    name: 'default',
+    email: 'default@default.com',
+    password: 'default111'
 })
 
 me.save().then(() => {
@@ -74,5 +74,5 @@ me.save().then(() => {
 }).catch((error) => {
     console.log('error!', error)
 })
-
+ */
 module.exports = User
