@@ -4,10 +4,7 @@ const express = require('express')
 const router = new express.Router()
 
 router.post('/users/save', async (req, res) => {
-    console.log("AAAAAAAAAAaa")
-    console.log(req.body)
     const user = new User(req.body)
-    console.log(user.email)
     
         try {
             await user.save()
@@ -35,8 +32,6 @@ router.get('/users', async (req, res) => {
 
 router.post('/users/login', async (req, res) => {
     try {
-        console.log('asdf')
-        console.log(req.body)
         const user = await User.findByCredentials(req.body.user, req.body.password)
         res.send(user)
     } catch(e) {
