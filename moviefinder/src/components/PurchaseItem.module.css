@@ -1,0 +1,7 @@
+.item {
+    border-radius: 5;
+    outline: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
