@@ -5,7 +5,7 @@ const router = new express.Router()
 
 router.post('/users/save', async (req, res) => {
     const user = new User(req.body)
-    
+   // account.passwordHash = bcrypt.hashSync(params.password, 10);
         try {
             await user.save()
             res.status(201).send({ user })
@@ -30,7 +30,7 @@ router.get('/users', async (req, res) => {
     // })
 })
 
-router.patch('/users/me', auth, async (req, res) => {
+router.patch('/users/me', async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -48,7 +48,7 @@ router.patch('/users/me', auth, async (req, res) => {
     }
 })
 
-router.delete('/users/me', auth, async (req, res) => {
+router.delete('/users/me', async (req, res) => {
     try {
         await req.user.remove()
         sendCancelationEmail(req.user.email, req.user.name)
@@ -59,15 +59,19 @@ router.delete('/users/me', auth, async (req, res) => {
 })
 
 router.post('/users/login', async (req, res) => {
+    console.log('hi')
     try {
+       // if (!account || !bcrypt.compareSync(password, account.passwordHash)) {
         const user = await User.findByCredentials(req.body.user, req.body.password)
+        console.log('agwg')
         res.send(user)
     } catch(e) {
         console.log(e)
+        console.log('eatwetw')
         res.status(400).send()
     }
 
-
+ 
     
     
  //   try {

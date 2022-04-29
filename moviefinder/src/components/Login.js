@@ -1,48 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from './Header'
 
-class Login extends React.Component {
+const Login = () => {
 
-    state={login: ""}
+    const [isLogin, setIsLogin] = useState(true)
+    const [error, setError] = useState('')
+    const navigate = useNavigate()
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
+        console.log('hiii')
         const data = new FormData(e.target);
         axios.post("http://localhost:9000/users/login", {
         user: data.get('username'),
         password: data.get('password')
-        
+
     })
         .then(res => {
-            this.setState({login: "Login successful"})
+            setError("Login successful")
             console.log(res.data)
             const user = {name: res.data.name}
             localStorage.setItem('user', user)
             setTimeout(() => { 
-                this.props.history.push('/');
+                navigate('/');
               }, 1000)
 
-        }).catch(error => this.setState({login: "Username or password is incorrect"}))
+        }).catch(error => setError("Username or password is incorrect"))
     }
 
 
-    
-
-    render() {
 
     return (
         <div><Header loc="login"/>
-            <div className="ui container"><form className="ui form" onSubmit={this.handleSubmit}><br />
-        <div className='heading'>Enter your username and password.  </div><br /><br />
-        <label>Username:</label>
+                 <div className="ui container"><form className="ui form" onSubmit={handleSubmit}><br />
+                 <div className='heading'>Enter your username and password.  </div><br /><br />
+                 <div style={{color: 'red'}}>{error}</div>
+                 <label>Username:</label>
         <input id="username" name="username" type="text" />
         <br /><label>Password:</label>
-        <input id="password" name="password" type="text" /><br />< br />
+                 <input id="password" name="password" type="text" /><br />< br />
         <button className="ui button primary">Submit</button>
-            </form><br />
-            <div style={{color: 'orange', fontWeight: 'bold' }}>{this.state.login}</div></div></div>
-    )}
+                 </form><br />
+                 <div style={{color: 'blue', fontWeight: 'bold', textAlign: 'center' }}>
+                     <Link to="/Register">Don't have an account? Register here.</Link></div>
+        </div>           
+   </div>
+    )
 }
 
 export default Login
