@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+
+import { Link, useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
 import Header from './Header'
 
@@ -8,21 +10,24 @@ const Login = () => {
     const [isLogin, setIsLogin] = useState(true)
     const [error, setError] = useState('')
 
+    const navigate = useNavigate()
+
     const handleSubmit = e => {
         e.preventDefault();
+        console.log('hiii')
         const data = new FormData(e.target);
         axios.post("http://localhost:9000/users/login", {
         user: data.get('username'),
         password: data.get('password')
-        
+
     })
         .then(res => {
-            this.setState({login: "Login successful"})
+            setError("Login successful")
             console.log(res.data)
             const user = {name: res.data.name}
             localStorage.setItem('user', user)
             setTimeout(() => { 
-                this.props.history.push('/');
+                navigate('/');
               }, 1000)
 
         }).catch(error => setError("Username or password is incorrect"))
@@ -34,6 +39,9 @@ const Login = () => {
         <div><Header loc="login"/>
                  <div className="ui container"><form className="ui form" onSubmit={handleSubmit}><br />
                  <div className='heading'>Enter your username and password.  </div><br /><br />
+
+                 <div style={{color: 'red'}}>{error}</div>
+
                  <label>Username:</label>
         <input id="username" name="username" type="text" />
         <br /><label>Password:</label>
