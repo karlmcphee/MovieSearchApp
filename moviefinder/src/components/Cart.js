@@ -3,10 +3,13 @@ import { useSelector, useDispatch} from 'react-redux'
 import { movieActions } from '../store/movie-slice';
 import PurchaseList from './PurchaseList'
 import Header from './Header'
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 const Cart = () => {
 
     let emptyCart = false
+    let navigate = useNavigate();
     const dispatch = useDispatch();
     const cartPrice = useSelector(state => state.movies.totalPrice)
     //const [movieItems, setMovieItems] = useState([])
@@ -34,7 +37,17 @@ const Cart = () => {
   const finishPurchase = () => {
     //database order submittal
     dispatch(movieActions.clearCart());
-  }
+    axios.post("http://localhost:9000/purchase/save", {
+      movies: movieItems,
+      price: cartPrice,  
+  })
+      .then(res => {
+        console.log(res)
+        let path = `/home`; 
+        navigate(path);
+
+  })
+}
 
   
 

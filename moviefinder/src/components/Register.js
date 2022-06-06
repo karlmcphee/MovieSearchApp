@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import Header from './Header'
 
 class Register extends React.Component {
 
@@ -30,6 +32,7 @@ class Register extends React.Component {
     render() {
 
     return (
+        <div><Header loc="login" />
             <div className="ui container"><form className="ui form" onSubmit={this.handleSubmit}><br />
         <div className='heading'>Enter a valid username, password, and email to register.</div><br /><br />
         <label>Username:</label>
@@ -40,7 +43,8 @@ class Register extends React.Component {
         <input id="email" name="email" type="email" /><br /><br />
         <button className="ui button primary">Submit</button>
             </form><br /><br />
-            <div style={{color: 'orange', fontWeight: 'bold' }}>{this.state.register}</div></div>
+            <div style={{color: 'blue', fontWeight: 'bold', textAlign: "center" }}><Link to="/Login">Login with a registered account here.</Link></div></div>
+            </div>
     )}
 }
 
