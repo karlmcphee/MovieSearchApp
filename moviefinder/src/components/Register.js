@@ -32,6 +32,7 @@ const Register = () => {
 
     return (
         <div><Header loc="login" />
+
             <div className="ui container"><form className="ui form" onSubmit={handleSubmit}><br />
         <div className='heading'>Enter a valid username, password, and email to register.</div><br /><br />
         <div style={{color: 'red'}}>{errorMessage}</div><br />

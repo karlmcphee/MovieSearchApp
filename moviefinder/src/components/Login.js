@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
 import Header from './Header'
 
@@ -7,6 +9,7 @@ const Login = () => {
 
     const [isLogin, setIsLogin] = useState(true)
     const [error, setError] = useState('')
+
     const navigate = useNavigate()
 
     const handleSubmit = e => {
@@ -36,7 +39,9 @@ const Login = () => {
         <div><Header loc="login"/>
                  <div className="ui container"><form className="ui form" onSubmit={handleSubmit}><br />
                  <div className='heading'>Enter your username and password.  </div><br /><br />
+
                  <div style={{color: 'red'}}>{error}</div>
+
                  <label>Username:</label>
         <input id="username" name="username" type="text" />
         <br /><label>Password:</label>
