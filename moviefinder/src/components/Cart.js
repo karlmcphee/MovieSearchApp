@@ -36,12 +36,14 @@ const Cart = () => {
 
   const finishPurchase = () => {
     //database order submittal
-    dispatch(movieActions.clearCart());
+    console.log('hi')
     axios.post("http://localhost:9000/purchase/save", {
       movies: movieItems,
       price: cartPrice,  
   })
       .then(res => {
+        alert("Your movies are on their way!")
+        dispatch(movieActions.clearCart());
         console.log(res)
         let path = `/home`; 
         navigate(path);
@@ -54,7 +56,7 @@ const Cart = () => {
   return (
 
     <div><Header />
-    {emptyCart ? <div className="container" ><h1>Your cart is currently empty.</h1> </div> :
+    {emptyCart ? <div className="container" style={{justifyContent:'center', alignItems:'center'}}><h1>Your cart is currently empty.</h1> </div> :
       <div><h1>Your Cart</h1>
     <div className="ui container">
     
