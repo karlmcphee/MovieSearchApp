@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Header from './Header'
 
-class Register extends React.Component {
+const Register = () => {
+    
+    const [errorMessage, setErrorMessage] = useState('')
+    const navigate = useNavigate();
 
-    state={register: ''}
-
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         const data = new FormData(e.target);
         axios.post("http://localhost:9000/users/save", {
@@ -16,25 +17,25 @@ class Register extends React.Component {
         password: data.get('password')     
     })
         .then(res => {
-            this.setState({register: 'Now registered!'})
+            setErrorMessage('Now registered!')
             localStorage.setItem('user', res.data)
             setTimeout(() => { 
-                this.props.history.push('/');
+                navigate('/');
               }, 1000)
         }).catch(error=> {
-            this.setState({register: `Registration failed.  Please follow the following guildelines: \n
+            setErrorMessage(`Registration failed.  Please follow the following guildelines: \n
             -Choose a unique username/email address \n
-            -Make sure that your password is 8 or more characters long.`})
+            -Make sure that your password is 8 or more characters long.`)
         })
     }
-    
-
-    render() {
+   
 
     return (
         <div><Header loc="login" />
-            <div className="ui container"><form className="ui form" onSubmit={this.handleSubmit}><br />
+
+            <div className="ui container"><form className="ui form" onSubmit={handleSubmit}><br />
         <div className='heading'>Enter a valid username, password, and email to register.</div><br /><br />
+        <div style={{color: 'red'}}>{errorMessage}</div><br />
         <label>Username:</label>
         <input id="username" name="username" type="text" />
         <br /><label>Password:</label>
@@ -45,7 +46,7 @@ class Register extends React.Component {
             </form><br /><br />
             <div style={{color: 'blue', fontWeight: 'bold', textAlign: "center" }}><Link to="/Login">Login with a registered account here.</Link></div></div>
             </div>
-    )}
+    )
 }
 
 export default Register
