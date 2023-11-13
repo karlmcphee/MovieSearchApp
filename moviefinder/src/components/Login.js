@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 import Header from './Header'
+import reCAPTCHA from "react-google-recaptcha"
 
 const Login = () => {
 
@@ -14,7 +15,6 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('hiii')
         const data = new FormData(e.target);
         axios.post("http://localhost:9000/users/login", {
         user: data.get('username'),
@@ -46,6 +46,7 @@ const Login = () => {
         <input id="username" name="username" type="text" />
         <br /><label>Password:</label>
                  <input id="password" name="password" type="text" /><br />< br />
+                 <reCAPTCHA sitekey={process.env.REACT_CAPTCHA_KEY} />
         <button className="ui button primary">Submit</button>
                  </form><br />
                  <div style={{color: 'blue', fontWeight: 'bold', textAlign: 'center' }}>
