@@ -27,11 +27,9 @@ const Browse = () => {
                 break;
             case "comedy":
                 comp = 35;
-                console.log("hii")
                 console.log(selectValue)
                 break;
             case "romance":
-                console.log("hiii")
                 console.log(selectValue)
                 comp = 10749;
                 break;
@@ -48,8 +46,10 @@ const Browse = () => {
         <div>
             <Header loc="browse"/>
             <div class="container" >
-                <h3>Browse by Genre</h3><br />
-            <div style={{whiteSpace: "nowrap", display: "flex"}}><select name="genres" id="genres"
+                <div style={{textAlign: "center"}} ><h3>Browse by Genre</h3><br />
+            <div style={{whiteSpace: "nowrap", display: "flex",
+  justifyContent: "center",
+  alignItems: "center"}}><select name="genres" id="genres"
                 value={selectValue} 
                 onChange={handleChange} >
                 <option value="action">Action</option>
@@ -57,7 +57,7 @@ const Browse = () => {
                 <option value="horror">Horror</option>
              <option value="romance">Romance</option>
 </select><div style={{marginLeft: 10}}>
-<button class="ui primary button" onClick={onSubmit}>Submit</button> </div></div></div><br />
+<button class="ui primary button" onClick={onSubmit}>Submit</button> </div></div></div></div><br />
 <MovieList results={results} />
         </div>
     )

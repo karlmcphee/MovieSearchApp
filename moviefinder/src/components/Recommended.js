@@ -30,6 +30,7 @@ class RankedMovies extends React.Component {
     return (
         <div>
             <Header loc="recommended"/>
+            <div style={{textAlign: "center"}}><h3>Most popular current movies!</h3></div>
             <label>{this.state.results2}</label>
             <MovieList results={this.state.results} />
         </div>

@@ -6,7 +6,7 @@ const PurchaseList = ( { items }) => {
     const list1 = items.map(result => {
         console.log(result)
         return (
-            <li><PurchaseItem title={result.title} price={result.price} poster={result.poster} id={result.id} /></li>
+            <div style={{fontFamily: "Bree", fontWeight:"bold", fontSize: "20px"}}><li><PurchaseItem title={result.title} price={result.price} poster={result.poster} id={result.id} /></li></div>
         )
     })
     return list1
